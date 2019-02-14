@@ -6,6 +6,10 @@ public class QueueInformation {
     private String exchangeName;
     private String queueName;
 
+    public QueueInformation(String exchangeName, String queueName){
+        this.exchangeName = exchangeName;
+        this.queueName = queueName;
+    }
 
     public String getExchangeName() {
         return exchangeName;

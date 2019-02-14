@@ -1,5 +1,8 @@
 package com.gcg.mektup.subscribe.thread;
 
+import com.gcg.mektup.lang.exception.EventException;
+import com.gcg.mektup.subscribe.impl.Subscriber;
+
 public class SubscriberThread implements Runnable {
 
     private int subscriberId;
@@ -10,11 +13,12 @@ public class SubscriberThread implements Runnable {
 
     @Override
     public void run() {
-
-        //TODO : subscribe queue
-
-        //TODO : call method
-
+        try {
+            new Subscriber().subscribe(this.subscriberId);
+        } catch (EventException e) {
+            e.printStackTrace();
+        }
 
     }
+
 }

@@ -3,7 +3,6 @@ package com.gcg.mektup.core;
 
 import com.gcg.mektup.annotation.scanner.MektupScan;
 import com.gcg.mektup.core.thread.ThreadManager;
-import com.gcg.mektup.logging.MektupLogger;
 import com.gcg.mektup.queue.core.SubscriberInformation;
 import com.gcg.mektup.scanner.Scanner;
 import com.gcg.mektup.subscribe.thread.SubscriberThread;
@@ -12,10 +11,11 @@ import org.springframework.context.ApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.logging.Logger;
 
 public class Mektup {
 
-    final static MektupLogger logger = new MektupLogger(Mektup.class);
+    final static Logger logger = Logger.getLogger(Mektup.class.getName());
 
     private static Class<?> mainClass;
     private static String[] scanPackages;
@@ -49,14 +49,14 @@ public class Mektup {
             //TODO : create subsciber Thread
             ExecutorService service = Executors.newFixedThreadPool(SubscriberInformation.getEventListenerList().size());
             for (int i = 0; i < SubscriberInformation.getEventListenerList().size(); i++){
-                logger.getLogger().info("Subscribing Method! : " + SubscriberInformation.getEventListenerList().get(i).getSubscriberMethod());
+                logger.info("Registered Subscribing Method! : " + SubscriberInformation.getEventListenerList().get(i).getSubscriberMethod());
                 Mektup.subscriberThreads.add(service.submit(new SubscriberThread(i)));
             }
 
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             scheduledExecutorService.scheduleAtFixedRate(new ThreadManager(), 0, 1, TimeUnit.MINUTES);
 
-            logger.getLogger().info("Mektup is initialized.");
+            logger.info("Mektup is initialized.");
 
         }
 
