@@ -1,14 +1,19 @@
 package com.gcg.mektup.annotation.marker;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.springframework.core.annotation.AliasFor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
+@RestController
 public @interface EventSubscriber {
 
-
+    @AliasFor(
+            annotation = Controller.class
+    )
+    String value() default "";
 
 }

@@ -23,9 +23,9 @@ import java.util.List;
      *
      * @param scanPackages
      */
-    public void scan(String[] scanPackages) {
+    protected void scan(String[] scanPackages) {
 
-        List<EventListener> eventListenerList = new ArrayList<EventListener>();
+        List<EventListener> eventListenerList = new ArrayList<>();
 
         for (String scanPackage : scanPackages) {
             ClassPathScanningCandidateComponentProvider provider = createAnnotationScanner();

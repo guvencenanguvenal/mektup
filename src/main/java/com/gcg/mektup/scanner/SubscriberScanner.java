@@ -1,5 +1,6 @@
 package com.gcg.mektup.scanner;
 
+import com.gcg.mektup.annotation.definition.EventRequestMapping;
 import com.gcg.mektup.annotation.marker.EventSubscriberService;
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.lang.queue.QueueInformation;
@@ -17,33 +18,35 @@ import java.util.List;
      *
      * @param beanDef
      */
-    public List<EventListener> scanSubsciber(BeanDefinition beanDef) {
+    protected List<EventListener> scanSubsciber(BeanDefinition beanDef) {
         try {
 
-            List<EventListener> eventListenerList = new ArrayList<EventListener>();
+            List<EventListener> eventListenerList = new ArrayList<>();
 
             Class<?> cl = Class.forName(beanDef.getBeanClassName());
 
             for (Method method : cl.getDeclaredMethods()) {
-                if (method.isAnnotationPresent(EventSubscriberService.class)) {
+                if (method.isAnnotationPresent(EventSubscriberService.class)
+                    && method.isAnnotationPresent(EventRequestMapping.class)) {
+
                     EventSubscriberService eventSubscriberService = method.getAnnotation(EventSubscriberService.class);
+                    EventRequestMapping eventRequestMapping  = method.getAnnotation(EventRequestMapping.class);
 
                     EventListener eventListener = new EventListener(
                             cl, //Subscriber class
                             method, //Subscriber method && REST Service
-                            method.getParameterTypes() //Method inputs
+                            method.getParameterTypes(), //Subscriber method input parameters
+                            eventRequestMapping.value(), //we choose first element
+                            eventRequestMapping.method() //we choose first element
                     );
 
                     eventListener.setQueueInformation(
                             new QueueInformation(
-                                    "",
+                                    "MEKTUP.EXCH",
                                     eventSubscriberService.queue())
                     );
 
                     eventListenerList.add(eventListener);
-
-                    //Object obj = Mektup.getApplicationContext().getBean(cl);
-                    //method.invoke(obj);
 
                 }
             }

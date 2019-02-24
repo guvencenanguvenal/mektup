@@ -20,10 +20,18 @@ public class QueueInformation {
     }
 
     public String getQueueName() {
-        return queueName;
+        return queueName + ".QUEUE";
     }
 
     public void setQueueName(String queueName) {
         this.queueName = queueName;
+    }
+
+    public String getINQueueName(){
+        return this.getQueueName() + ".IN";
+    }
+
+    public String getOUTQueueName(){
+        return this.getQueueName() + ".OUT";
     }
 }

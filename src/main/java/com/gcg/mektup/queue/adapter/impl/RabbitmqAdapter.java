@@ -43,14 +43,14 @@ public class RabbitmqAdapter implements QueueAdapter {
                 throw new QueueConnectionException("Queue is not Connect");
             }
 
-            channel.basicPublish("TEST.EXCH", "TEST.QUEUE", null, "DENEME".getBytes());
+            channel.basicPublish("TEST.EXCH", "TEST.QUEUE", null, "{\"input\":\"Is there pain in your hand?\"}".getBytes());
 
             channel.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new QueueConnectionException(e.getMessage(), e);
         } catch (TimeoutException e) {
-            e.printStackTrace();
+            throw new QueueConnectionException(e.getMessage(), e);
         }
 
     }
