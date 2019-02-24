@@ -38,7 +38,6 @@ import java.util.List;
 
     }
 
-
     /**
      * Add EventSubscriber class filter then scan method find only class which has EventSubscriber annotation
      *
