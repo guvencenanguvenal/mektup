@@ -23,11 +23,14 @@ public class EventListener {
     private final String[] path;
     private final RequestMethod[] requestMethod;
 
-    public EventListener(Class<?> subscriberClass,
+    public EventListener(
+                        Long eventId,
+                         Class<?> subscriberClass,
                          Method subscriberMethod,
                          Class<?>[] subscriberMethodInputs,
                          String[] path,
                          RequestMethod[] requestMethod) {
+        this.eventId = eventId;
         this.subscriberClass = subscriberClass;
         this.subscriberMethod = subscriberMethod;
         this.subscriberMethodInputs = subscriberMethodInputs;

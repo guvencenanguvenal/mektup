@@ -1,12 +1,12 @@
 package com.gcg.mektup.queue.adapter;
 
-import com.gcg.mektup.lang.exception.EventException;
+import com.gcg.mektup.lang.exception.QueueConnectionException;
 
 public interface QueueAdapter {
 
-    void connect() throws EventException;
+    void connect() throws QueueConnectionException;
 
-    void basicPublish(String var1, String var2, byte[] var4) throws EventException;
+    void send(String var1, String var2, byte[] var4) throws QueueConnectionException;
 
     void close();
 

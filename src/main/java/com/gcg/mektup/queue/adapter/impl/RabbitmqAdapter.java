@@ -15,14 +15,13 @@ public class RabbitmqAdapter implements QueueAdapter {
     private Connection conn;
     private Channel channel;
 
-    public void connect() throws EventException {
+    public void connect() throws QueueConnectionException {
 
         factory.setUsername("guest");
         factory.setPassword("guest");
         factory.setVirtualHost("/");
         factory.setHost("localhost");
         factory.setPort(5672);
-
 
         try {
             conn = factory.newConnection();
@@ -36,14 +35,14 @@ public class RabbitmqAdapter implements QueueAdapter {
 
     }
 
-    public void basicPublish(String exchangeName, String queueName, byte[] var) throws EventException {
+    public void send(String exchangeName, String queueName, byte[] var) throws QueueConnectionException {
         try {
 
             if (null == conn){
                 throw new QueueConnectionException("Queue is not Connect");
             }
 
-            channel.basicPublish("TEST.EXCH", "TEST.QUEUE", null, "{\"input\":\"Is there pain in your hand?\"}".getBytes());
+            channel.basicPublish(exchangeName, queueName, null, var);
 
             channel.close();
 
@@ -55,7 +54,7 @@ public class RabbitmqAdapter implements QueueAdapter {
 
     }
 
-    public void basicConsume(String queueName, String tag, Consumer consumer) throws EventException {
+    public void receive(String queueName, String tag, Consumer consumer) throws EventException {
         try {
             channel.basicConsume(queueName, true, tag, consumer);
         } catch (IOException e) {

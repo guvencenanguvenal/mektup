@@ -3,7 +3,8 @@ package com.gcg.mektup.core;
 
 import com.gcg.mektup.annotation.scanner.MektupScan;
 import com.gcg.mektup.core.thread.ThreadManager;
-import com.gcg.mektup.queue.core.SubscriberInformation;
+import com.gcg.mektup.lang.exception.MektupException;
+import com.gcg.mektup.scanner.model.SubscriberInformation;
 import com.gcg.mektup.scanner.Scanner;
 import com.gcg.mektup.subscribe.thread.SubscriberThread;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +24,7 @@ public class Mektup {
     private static ApplicationContext applicationContext;
     private static List<Future<?>> subscriberThreads = new ArrayList<Future<?>>();
 
-    public  static <T> void  initialize(Class<T> classType, ApplicationContext applicationContext){
+    public  static <T> void  initialize(Class<T> classType, ApplicationContext applicationContext) throws MektupException {
 
         Mektup.mainClass = classType;
 
@@ -47,9 +48,9 @@ public class Mektup {
             new Scanner().scan(Mektup.scanPackages);
 
             //TODO : create subsciber Thread
-            ExecutorService service = Executors.newFixedThreadPool(SubscriberInformation.getEventListenerList().size());
-            for (int i = 0; i < SubscriberInformation.getEventListenerList().size(); i++){
-                logger.info("Registered Subscribing Method! : " + SubscriberInformation.getEventListenerList().get(i).getSubscriberMethod());
+            ExecutorService service = Executors.newFixedThreadPool(SubscriberInformation.getInstance().getEventListenerList().size());
+            for (int i = 0; i < SubscriberInformation.getInstance().getEventListenerList().size(); i++){
+                logger.info("Registered Subscribing Method! : " + SubscriberInformation.getInstance().getEventListenerList().get(i).getSubscriberMethod());
                 Mektup.subscriberThreads.add(service.submit(new SubscriberThread(i)));
             }
 

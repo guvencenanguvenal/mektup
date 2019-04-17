@@ -3,6 +3,7 @@ package com.gcg.mektup.scanner;
 import com.gcg.mektup.annotation.definition.EventRequestMapping;
 import com.gcg.mektup.annotation.marker.EventSubscriberService;
 import com.gcg.mektup.lang.event.EventListener;
+import com.gcg.mektup.lang.exception.ScannerException;
 import com.gcg.mektup.lang.queue.QueueInformation;
 import org.springframework.beans.factory.config.BeanDefinition;
 
@@ -18,7 +19,7 @@ import java.util.List;
      *
      * @param beanDef
      */
-    protected List<EventListener> scanSubsciber(BeanDefinition beanDef) {
+    protected List<EventListener> scanSubsciber(BeanDefinition beanDef) throws ScannerException{
         try {
 
             List<EventListener> eventListenerList = new ArrayList<>();
@@ -33,9 +34,10 @@ import java.util.List;
                     EventRequestMapping eventRequestMapping  = method.getAnnotation(EventRequestMapping.class);
 
                     EventListener eventListener = new EventListener(
-                            cl, //Subscriber class
-                            method, //Subscriber method && REST Service
-                            method.getParameterTypes(), //Subscriber method input parameters
+                            eventSubscriberService.eventId(),
+                            cl, //Caller class
+                            method, //Caller method && REST Service
+                            method.getParameterTypes(), //Caller method input parameters
                             eventRequestMapping.value(), //we choose first element
                             eventRequestMapping.method() //we choose first element
                     );
@@ -55,8 +57,7 @@ import java.util.List;
 
         } catch (Exception e) {
             System.err.println("Got exception: " + e.getMessage());
-
-            return null;
+            throw new ScannerException(e.getMessage(), e);
         }
     }
 

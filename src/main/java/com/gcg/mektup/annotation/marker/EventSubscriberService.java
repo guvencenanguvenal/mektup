@@ -9,6 +9,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface EventSubscriberService {
 
+    long eventId() default -1L;
+
     String queue();
+
+    boolean idempotency() default false;
 
 }
