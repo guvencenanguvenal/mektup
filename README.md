@@ -9,6 +9,19 @@ This project is a eventbus for Java Spring RESTFul services
 
 ## Usage :rocket:
 
+```java
+@SpringBootApplication
+@MektupScan("com.mektup.test")
+public class TesterApplication {
+
+	public static void main(String[] args) throws MektupException {
+		ApplicationContext context = SpringApplication.run(TesterApplication.class, args);
+		Mektup.initialize(TesterApplication.class, context);
+	}
+
+}
+```
+
 ## Super Simple :checkered_flag:
 
 Publisher
