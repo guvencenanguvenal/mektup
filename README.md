@@ -11,6 +11,28 @@ This project is a eventbus for Java Spring RESTFul services
 
 ## Super Simple :checkered_flag:
 
+Publisher
+
+```java
+EventCreator publisher = new EventCreator();
+try {
+    publisher.create(001L, "{ \"id\": 1, \"name\":\"Guven\" }".getBytes());
+} catch (EventException e) {
+    //
+}
+```
+
+Subscriber
+
+```java
+@EventSubscriberService(eventId = 001L, queue = "TEST")
+@EventRequestMapping(value = "/home2")
+public String home2(Deneme deneme){
+    System.out.println("deneme2");
+    return "deneme2";
+}
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/guvencenanguvenal/katip/fork )
