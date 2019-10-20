@@ -43,10 +43,6 @@ public class EventListener {
         return eventId;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
     public Class<?> getSubscriberClass() {
         return subscriberClass;
     }

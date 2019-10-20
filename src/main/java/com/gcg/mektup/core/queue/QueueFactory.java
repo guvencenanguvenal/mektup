@@ -1,7 +1,7 @@
-package com.gcg.mektup.queue;
+package com.gcg.mektup.core.queue;
 
-import com.gcg.mektup.queue.adapter.QueueAdapter;
-import com.gcg.mektup.queue.adapter.impl.RabbitmqAdapter;
+import com.gcg.mektup.core.queue.adapter.QueueAdapter;
+import com.gcg.mektup.core.queue.adapter.impl.RabbitmqAdapter;
 
 public class QueueFactory {
 

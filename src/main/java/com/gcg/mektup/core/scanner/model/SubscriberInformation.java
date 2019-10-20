@@ -1,4 +1,4 @@
-package com.gcg.mektup.scanner.model;
+package com.gcg.mektup.core.scanner.model;
 
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.lang.exception.EventIdNotFound;

@@ -1,9 +1,9 @@
-package com.gcg.mektup.queue.adapter.impl;
+package com.gcg.mektup.core.queue.adapter.impl;
 
 import com.gcg.mektup.lang.exception.EventException;
 import com.gcg.mektup.lang.exception.EventReadException;
 import com.gcg.mektup.lang.exception.QueueConnectionException;
-import com.gcg.mektup.queue.adapter.QueueAdapter;
+import com.gcg.mektup.core.queue.adapter.QueueAdapter;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;

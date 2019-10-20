@@ -1,10 +1,9 @@
-package com.gcg.mektup.subscribe.impl;
+package com.gcg.mektup.core.subscribe.impl;
 
 import com.gcg.mektup.lang.event.EventListener;
-import com.gcg.mektup.scanner.model.SubscriberInformation;
-import com.gcg.mektup.subscribe.method.Caller;
-import com.gcg.mektup.subscribe.method.InvokeSubscribe;
-import com.gcg.mektup.subscribe.method.RESTSubscribe;
+import com.gcg.mektup.core.scanner.model.SubscriberInformation;
+import com.gcg.mektup.core.subscribe.method.Caller;
+import com.gcg.mektup.core.subscribe.method.InvokeSubscribe;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
@@ -13,7 +12,7 @@ import com.rabbitmq.client.ShutdownSignalException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-public class EventConsumer implements Consumer {
+public class EventSubscriber implements Consumer {
 
     private volatile String _consumerTag;
 

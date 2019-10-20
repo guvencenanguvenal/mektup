@@ -1,7 +1,7 @@
-package com.gcg.mektup.subscribe.thread;
+package com.gcg.mektup.core.subscribe.thread;
 
 import com.gcg.mektup.lang.exception.EventException;
-import com.gcg.mektup.subscribe.impl.Subscriber;
+import com.gcg.mektup.core.subscribe.impl.Subscriber;
 
 public class SubscriberThread implements Runnable {
 

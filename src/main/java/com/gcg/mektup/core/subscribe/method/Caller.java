@@ -1,4 +1,4 @@
-package com.gcg.mektup.subscribe.method;
+package com.gcg.mektup.core.subscribe.method;
 
 import com.gcg.mektup.lang.event.EventListener;
 

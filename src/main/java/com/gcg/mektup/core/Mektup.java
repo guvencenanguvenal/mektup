@@ -4,9 +4,9 @@ package com.gcg.mektup.core;
 import com.gcg.mektup.annotation.scanner.MektupScan;
 import com.gcg.mektup.core.thread.ThreadManager;
 import com.gcg.mektup.lang.exception.MektupException;
-import com.gcg.mektup.scanner.model.SubscriberInformation;
-import com.gcg.mektup.scanner.Scanner;
-import com.gcg.mektup.subscribe.thread.SubscriberThread;
+import com.gcg.mektup.core.scanner.model.SubscriberInformation;
+import com.gcg.mektup.core.scanner.Scanner;
+import com.gcg.mektup.core.subscribe.thread.SubscriberThread;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class Mektup {
 
             new Scanner().scan(Mektup.scanPackages);
 
-            //TODO : create subsciber Thread
+            //TODO : publish subsciber Thread
             ExecutorService service = Executors.newFixedThreadPool(SubscriberInformation.getInstance().getEventListenerList().size());
             for (int i = 0; i < SubscriberInformation.getInstance().getEventListenerList().size(); i++){
                 logger.info("Registered Subscribing Method! : " + SubscriberInformation.getInstance().getEventListenerList().get(i).getSubscriberMethod());

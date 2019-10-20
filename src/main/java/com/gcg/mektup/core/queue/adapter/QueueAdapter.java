@@ -1,4 +1,4 @@
-package com.gcg.mektup.queue.adapter;
+package com.gcg.mektup.core.queue.adapter;
 
 import com.gcg.mektup.lang.exception.QueueConnectionException;
 

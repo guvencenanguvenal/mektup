@@ -1,4 +1,4 @@
-package com.gcg.mektup.scanner;
+package com.gcg.mektup.core.scanner;
 
 import com.gcg.mektup.annotation.definition.EventRequestMapping;
 import com.gcg.mektup.annotation.marker.EventSubscriberService;

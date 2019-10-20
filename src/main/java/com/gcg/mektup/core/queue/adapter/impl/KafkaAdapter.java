@@ -1,7 +1,7 @@
-package com.gcg.mektup.queue.adapter.impl;
+package com.gcg.mektup.core.queue.adapter.impl;
 
 import com.gcg.mektup.lang.exception.QueueConnectionException;
-import com.gcg.mektup.queue.adapter.QueueAdapter;
+import com.gcg.mektup.core.queue.adapter.QueueAdapter;
 
 public class KafkaAdapter implements QueueAdapter {
     @Override

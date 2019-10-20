@@ -1,4 +1,4 @@
-package com.gcg.mektup.scanner;
+package com.gcg.mektup.core.scanner;
 
 import com.gcg.mektup.lang.exception.ScannerException;
 

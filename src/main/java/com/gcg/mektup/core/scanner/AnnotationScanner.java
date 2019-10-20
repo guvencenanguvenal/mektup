@@ -1,9 +1,9 @@
-package com.gcg.mektup.scanner;
+package com.gcg.mektup.core.scanner;
 
 import com.gcg.mektup.annotation.marker.EventSubscriber;
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.lang.exception.ScannerException;
-import com.gcg.mektup.scanner.model.SubscriberInformation;
+import com.gcg.mektup.core.scanner.model.SubscriberInformation;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;

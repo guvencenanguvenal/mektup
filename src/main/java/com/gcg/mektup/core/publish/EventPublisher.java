@@ -1,14 +1,14 @@
-package com.gcg.mektup.publish;
+package com.gcg.mektup.core.publish;
 
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.lang.exception.EventCreateException;
-import com.gcg.mektup.queue.QueueFactory;
-import com.gcg.mektup.queue.adapter.QueueAdapter;
-import com.gcg.mektup.scanner.model.SubscriberInformation;
+import com.gcg.mektup.core.queue.QueueFactory;
+import com.gcg.mektup.core.queue.adapter.QueueAdapter;
+import com.gcg.mektup.core.scanner.model.SubscriberInformation;
 
-public class EventCreator {
+public class EventPublisher {
 
-    public void create(Long eventId, byte[] input) throws EventCreateException {
+    public void publish(Long eventId, byte[] input) throws EventCreateException {
 
         QueueAdapter queueAdapter = QueueFactory.getQueue();
 
