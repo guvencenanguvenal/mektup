@@ -16,7 +16,7 @@ public class TesterApplication {
 
 	public static void main(String[] args) throws MektupException {
 		ApplicationContext context = SpringApplication.run(TesterApplication.class, args);
-		Mektup.initialize(TesterApplication.class, context);
+		MektupApplication.run(TesterApplication.class, context);
 	}
 
 }
@@ -27,9 +27,8 @@ public class TesterApplication {
 Publisher
 
 ```java
-EventCreator publisher = new EventCreator();
 try {
-    publisher.create(001L, "{ \"id\": 1, \"name\":\"Guven\" }".getBytes());
+    EventCreator.create(001L, "{ \"id\": 1, \"name\":\"Guven\" }".getBytes());
 } catch (EventException e) {
     //
 }
