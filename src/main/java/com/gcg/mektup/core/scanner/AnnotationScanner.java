@@ -40,7 +40,7 @@ import java.util.List;
     }
 
     /**
-     * Add EventSubscriber class filter then scan method find only class which has EventSubscriber annotation
+     * Add EventExecuter class filter then scan method find only class which has EventExecuter annotation
      *
      *
      * @return

@@ -12,7 +12,7 @@ import com.rabbitmq.client.ShutdownSignalException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-public class EventSubscriber implements Consumer {
+public class EventExecuter implements Consumer {
 
     private volatile String _consumerTag;
 

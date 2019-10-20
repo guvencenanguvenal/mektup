@@ -14,7 +14,7 @@ public class Subscriber {
         QueueAdapter queueAdapter = QueueFactory.getQueue();
         queueAdapter.connect();
 
-        Consumer consumer = new EventSubscriber();
+        Consumer consumer = new EventExecuter();
 
         ((RabbitmqAdapter) queueAdapter).receive(
                 SubscriberInformation.getInstance().getEventListenerList().get(subscriberId).getQueueInformation().getQueueName(),

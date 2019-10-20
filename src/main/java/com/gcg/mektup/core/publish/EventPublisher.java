@@ -1,5 +1,6 @@
 package com.gcg.mektup.core.publish;
 
+import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.lang.exception.EventCreateException;
 import com.gcg.mektup.core.queue.QueueFactory;
@@ -18,6 +19,8 @@ public class EventPublisher {
                 eventListener.getQueueInformation().getExchangeName(),
                 eventListener.getQueueInformation().getQueueName(),
                 input);
+
+        MektupLog.info("Event sending queue.");
 
         queueAdapter.close();
 
