@@ -3,6 +3,7 @@ package com.gcg.mektup.core;
 
 import com.gcg.mektup.annotation.scanner.MektupScan;
 import com.gcg.mektup.core.log.MektupLog;
+import com.gcg.mektup.core.server.http.MektupHttpServer;
 import com.gcg.mektup.core.thread.ThreadManager;
 import com.gcg.mektup.lang.exception.MektupException;
 import com.gcg.mektup.core.scanner.model.SubscriberInformation;
@@ -55,6 +56,9 @@ public class Mektup {
 
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             scheduledExecutorService.scheduleAtFixedRate(new ThreadManager(), 0, 1, TimeUnit.MINUTES);
+
+            MektupHttpServer mektupHttpServer = new MektupHttpServer();
+            mektupHttpServer.start();
 
             MektupLog.info("Mektup is initialized.");
 

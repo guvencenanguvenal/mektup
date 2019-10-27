@@ -32,8 +32,8 @@ public class LogConfiguration {
 
     }
 
-    private Level logLevel;
-    private String formatter;
+    private Level logLevel = Level.ALL; //Have default value
+    private String formatter = "xxxx"; //Have default value
 
     public Level getLogLevel() {
         return logLevel;

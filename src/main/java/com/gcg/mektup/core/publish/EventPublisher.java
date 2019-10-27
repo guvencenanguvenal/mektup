@@ -20,7 +20,7 @@ public class EventPublisher {
                 eventListener.getQueueInformation().getQueueName(),
                 input);
 
-        MektupLog.info("Event sending queue.");
+        MektupLog.info("Id : " + eventId + " event sending queue.");
 
         queueAdapter.close();
 
