@@ -13,7 +13,7 @@ public class MektupLog {
     private MektupLog(){ }
 
     private static void log(Level level, String log){
-        if (LogConfiguration.getInstance().getLogLevel().intValue() > level.intValue())
+        if (LogConfiguration.getInstance().getLogLevel().intValue() >= level.intValue())
             logger.log(level, log);
     }
 

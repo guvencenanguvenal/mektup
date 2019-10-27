@@ -1,6 +1,7 @@
 package com.gcg.mektup.core.config;
 
 import com.gcg.mektup.core.Mektup;
+import com.gcg.mektup.core.constant.ConfigConstants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,14 +18,14 @@ public class LogConfiguration {
 
     private LogConfiguration(){
 
-        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream("mektup-log.properties")) {
+        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.LOG_PROPERTIES_FILE_NAME)) {
 
             Properties prop = new Properties();
 
             prop.load(input);
 
-            logLevel = Level.parse(prop.getProperty("mektup.log.level"));
-            formatter = prop.getProperty("mektup.log.formetter");
+            logLevel = Level.parse(prop.getProperty(ConfigConstants.LOG_LEVEL));
+            formatter = prop.getProperty(ConfigConstants.LOG_FORMATTER);
 
         } catch (IOException ex) {
             System.out.println("Mektup log property is not found!");

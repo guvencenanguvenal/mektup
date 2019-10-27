@@ -14,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.logging.Logger;
 
 public class Mektup {
 

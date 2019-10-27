@@ -19,17 +19,15 @@ public class MektupHttpServer {
     public void start() {
 
         try {
-            hs = HttpServer.create(new InetSocketAddress(8888), 0);
+            hs = HttpServer.create(new InetSocketAddress(MektupConfiguration.getInstance().getServicePort()), 0);
 
             if (MektupConfiguration.getInstance().isDependencyService()){
                 hs.createContext("/mektup/dependencies", new HttpHandler() {
 
                     public void handle(HttpExchange t) throws IOException {
-                        InputStream is = t.getRequestBody();
-                        System.out.println(t.getRemoteAddress().toString());
                         String response = DependencyService.eventDependencies();
-                        t.sendResponseHeaders(200, response.length());
                         t.getResponseHeaders().add("Content-Type", "application/json");
+                        t.sendResponseHeaders(200, response.length());
                         OutputStream os = t.getResponseBody();
                         os.write(response.getBytes());
                         os.close();
@@ -41,10 +39,9 @@ public class MektupHttpServer {
                 hs.createContext("/mektup/eventsinfo", new HttpHandler() {
 
                     public void handle(HttpExchange t) throws IOException {
-                        InputStream is = t.getRequestBody();
                         String response = EventsInfoService.eventsInfo();
-                        t.sendResponseHeaders(200, response.length());
                         t.getResponseHeaders().add("Content-Type", "application/json");
+                        t.sendResponseHeaders(200, response.length());
                         OutputStream os = t.getResponseBody();
                         os.write(response.getBytes());
                         os.close();
