@@ -8,6 +8,8 @@ public interface QueueAdapter {
 
     void send(String var1, String var2, byte[] var4) throws QueueConnectionException;
 
+    void consumer();
+
     void close();
 
 }

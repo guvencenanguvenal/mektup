@@ -15,4 +15,7 @@ public class ConfigConstants {
     public static final String LOG_LEVEL = "mektup.log.level";
     public static final String LOG_FORMATTER = "mektup.log.formatter";
 
+    public static final String QUEUE_CONN_STRING = "mektup.queue.connectionstring";
+    public static final String QUEUE_ADAPTER = "mektup.queue.adapter";
+
 }

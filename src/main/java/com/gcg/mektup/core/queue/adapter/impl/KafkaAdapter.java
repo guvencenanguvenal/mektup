@@ -15,6 +15,11 @@ public class KafkaAdapter implements QueueAdapter {
     }
 
     @Override
+    public void consumer() {
+
+    }
+
+    @Override
     public void close() {
 
     }

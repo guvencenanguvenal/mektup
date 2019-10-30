@@ -2,6 +2,8 @@ package com.gcg.mektup.core;
 
 
 import com.gcg.mektup.annotation.scanner.MektupScan;
+import com.gcg.mektup.core.config.Configuration;
+import com.gcg.mektup.core.config.builder.ConfigurationBuilder;
 import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.core.server.http.MektupHttpServer;
 import com.gcg.mektup.core.thread.ThreadManager;
@@ -43,6 +45,8 @@ public class Mektup {
             //TODO : Assert null
             Mektup.scanPackages = scanAnnotation.value();
             Mektup.applicationContext = applicationContext;
+
+            ConfigurationBuilder.configInitializer();
 
             new Scanner().scan(Mektup.scanPackages);
 

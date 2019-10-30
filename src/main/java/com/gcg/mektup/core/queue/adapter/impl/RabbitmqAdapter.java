@@ -54,6 +54,11 @@ public class RabbitmqAdapter implements QueueAdapter {
 
     }
 
+    @Override
+    public void consumer() {
+
+    }
+
     public void receive(String queueName, String tag, Consumer consumer) throws EventException {
         try {
             channel.basicConsume(queueName, true, tag, consumer);
