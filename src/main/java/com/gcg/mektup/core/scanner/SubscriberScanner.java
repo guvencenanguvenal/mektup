@@ -2,6 +2,7 @@ package com.gcg.mektup.core.scanner;
 
 import com.gcg.mektup.annotation.definition.EventRequestMapping;
 import com.gcg.mektup.annotation.marker.EventSubscriberService;
+import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.lang.exception.ScannerException;
 import com.gcg.mektup.lang.queue.QueueInformation;
@@ -50,13 +51,17 @@ import java.util.List;
 
                     eventListenerList.add(eventListener);
 
+                    MektupLog.info("Subscriber found : " + beanDef.getBeanClassName());
+                    MektupLog.info("eventid : " + eventSubscriberService.eventId());
+                    MektupLog.info("method : " + method);
+
                 }
             }
 
             return eventListenerList;
 
-        } catch (Exception e) {
-            System.err.println("Got exception: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            MektupLog.severe(e.getMessage());
             throw new ScannerException(e.getMessage(), e);
         }
     }

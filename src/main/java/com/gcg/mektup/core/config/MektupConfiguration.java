@@ -18,26 +18,12 @@ public class MektupConfiguration implements Configuration {
     }
 
     private MektupConfiguration(){
-        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.MEKTUP_PROPERTIES_FILE_NAME)) {
 
-            Properties prop = new Properties();
-
-            prop.load(input);
-
-            dependencyService = Boolean.valueOf(prop.getProperty(ConfigConstants.DEPENDENCY_SERVICE));
-            eventsInfoService = Boolean.valueOf(prop.getProperty(ConfigConstants.EVENTS_INFO_SERVICE));
-            servicePort = Integer.valueOf(prop.getProperty(ConfigConstants.MEKTUP_SERVICE_PORT));
-
-
-        } catch (IOException ex) {
-            MektupLog.severe("Mektup log property is not found!");
-        }
     }
 
     private boolean dependencyService = true; //Have default value
     private boolean eventsInfoService = true; //Have default value
     private int servicePort = 8888; //Have default value
-
 
     public boolean isDependencyService() {
         return dependencyService;
@@ -56,7 +42,6 @@ public class MektupConfiguration implements Configuration {
         try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.MEKTUP_PROPERTIES_FILE_NAME)) {
 
             Properties prop = new Properties();
-
             prop.load(input);
 
             dependencyService = Boolean.valueOf(prop.getProperty(ConfigConstants.DEPENDENCY_SERVICE));
@@ -64,8 +49,8 @@ public class MektupConfiguration implements Configuration {
             servicePort = Integer.valueOf(prop.getProperty(ConfigConstants.MEKTUP_SERVICE_PORT));
 
         } catch (IOException ex) {
-            MektupLog.severe("Mektup log property is not found!");
-            throw new ConfigurationException("Mektup log property is not found!", ex);
+            MektupLog.severe("Mektup property is not found!");
+            throw new ConfigurationException("Mektup property is not found!", ex);
         }
     }
 }

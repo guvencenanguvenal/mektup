@@ -2,6 +2,7 @@ package com.gcg.mektup.core.config;
 
 import com.gcg.mektup.core.Mektup;
 import com.gcg.mektup.core.constant.ConfigConstants;
+import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.lang.exception.ConfigurationException;
 
 import java.io.IOException;
@@ -47,14 +48,13 @@ public class LogConfiguration implements Configuration {
         try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.LOG_PROPERTIES_FILE_NAME)) {
 
             Properties prop = new Properties();
-
             prop.load(input);
 
             logLevel = Level.parse(prop.getProperty(ConfigConstants.LOG_LEVEL));
             formatter = prop.getProperty(ConfigConstants.LOG_FORMATTER);
 
         } catch (IOException ex) {
-            System.out.println("Mektup log property is not found!");
+            MektupLog.severe("Mektup log property is not found!");
             throw new ConfigurationException("Mektup log property is not found!", ex);
         }
     }

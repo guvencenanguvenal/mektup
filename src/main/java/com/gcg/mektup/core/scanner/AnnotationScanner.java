@@ -1,6 +1,7 @@
 package com.gcg.mektup.core.scanner;
 
 import com.gcg.mektup.annotation.marker.EventSubscriber;
+import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.lang.exception.ScannerException;
 import com.gcg.mektup.core.scanner.model.SubscriberInformation;
@@ -30,6 +31,7 @@ import java.util.List;
 
         for (String scanPackage : scanPackages) {
             ClassPathScanningCandidateComponentProvider provider = createAnnotationScanner();
+            MektupLog.info("Scanning package : " + scanPackage);
             for (BeanDefinition beanDef : provider.findCandidateComponents(scanPackage)) {
                 eventListenerList.addAll(new SubscriberScanner().scanSubsciber(beanDef));
             }
