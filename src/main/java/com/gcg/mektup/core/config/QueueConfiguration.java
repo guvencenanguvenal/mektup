@@ -19,27 +19,20 @@ public class QueueConfiguration implements Configuration {
     }
 
     private String queueAdapter = "";
-    private String queueConnectionString = "";
-
 
     public String getQueueAdapter() {
         return queueAdapter;
     }
 
-    public String getQueueConnectionString() {
-        return queueConnectionString;
-    }
-
     @Override
     public void initialize() throws ConfigurationException {
-        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.LOG_PROPERTIES_FILE_NAME)) {
+        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.MEKTUP_PROPERTIES_FILE_NAME)) {
 
             Properties prop = new Properties();
 
             prop.load(input);
 
             queueAdapter = prop.getProperty(ConfigConstants.QUEUE_ADAPTER);
-            queueConnectionString = prop.getProperty(ConfigConstants.QUEUE_CONN_STRING);
 
         } catch (IOException ex) {
             System.out.println("Mektup log property is not found!");
