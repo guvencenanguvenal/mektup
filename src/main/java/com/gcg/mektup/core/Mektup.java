@@ -1,16 +1,13 @@
 package com.gcg.mektup.core;
 
-
 import com.gcg.mektup.annotation.scanner.MektupScan;
-import com.gcg.mektup.core.config.Configuration;
 import com.gcg.mektup.core.config.builder.ConfigurationBuilder;
 import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.core.server.http.MektupHttpServer;
-import com.gcg.mektup.core.thread.ThreadManager;
+import com.gcg.mektup.core.subscribe.impl.Subscriber;
 import com.gcg.mektup.lang.exception.MektupException;
 import com.gcg.mektup.core.scanner.model.SubscriberInformation;
 import com.gcg.mektup.core.scanner.Scanner;
-import com.gcg.mektup.core.subscribe.thread.SubscriberThread;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
@@ -54,11 +51,8 @@ public class Mektup {
             ExecutorService service = Executors.newFixedThreadPool(SubscriberInformation.getInstance().getEventListenerList().size());
             for (int i = 0; i < SubscriberInformation.getInstance().getEventListenerList().size(); i++){
                 MektupLog.info("Registered Subscribing Method! : " + SubscriberInformation.getInstance().getEventListenerList().get(i).getSubscriberMethod());
-                Mektup.subscriberThreads.add(service.submit(new SubscriberThread(i)));
+                new Subscriber().subscribe(i);
             }
-
-            ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-            scheduledExecutorService.scheduleAtFixedRate(new ThreadManager(), 0, 1, TimeUnit.MINUTES);
 
             MektupHttpServer mektupHttpServer = new MektupHttpServer();
             mektupHttpServer.start();

@@ -1,4 +1,4 @@
-package com.gcg.mektup.core.subscribe.impl;
+package com.gcg.mektup.core.queue.adapter.impl;
 
 import com.gcg.mektup.lang.event.EventListener;
 import com.gcg.mektup.core.scanner.model.SubscriberInformation;

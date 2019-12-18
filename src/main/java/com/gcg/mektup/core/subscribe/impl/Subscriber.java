@@ -11,15 +11,18 @@ public class Subscriber {
 
     public void subscribe(int subscriberId) throws EventException {
 
-        QueueAdapter queueAdapter = QueueFactory.getQueue();
+        QueueAdapter queueAdapter = null;
+
+        try {
+            queueAdapter = QueueFactory.getQueue();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         queueAdapter.connect();
 
-        Consumer consumer = new EventExecuter();
-
-        ((RabbitmqAdapter) queueAdapter).receive(
-                SubscriberInformation.getInstance().getEventListenerList().get(subscriberId).getQueueInformation().getQueueName(),
-                SubscriberInformation.getInstance().getEventListenerList().get(subscriberId).getSubscriberMethod().getName() + "_tag",
-                consumer);
+        queueAdapter.consumer(
+                SubscriberInformation.getInstance().getEventListenerList().get(subscriberId).getQueueInformation().getQueueName()
+        );
 
     }
 

@@ -11,7 +11,13 @@ public class EventPublisher {
 
     public void publish(Long eventId, byte[] input) throws EventCreateException {
 
-        QueueAdapter queueAdapter = QueueFactory.getQueue();
+        QueueAdapter queueAdapter = null;
+
+        try {
+            queueAdapter = QueueFactory.getQueue();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         queueAdapter.connect();
         EventListener eventListener = SubscriberInformation.getInstance().getEventListenerFromEventId(eventId);

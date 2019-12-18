@@ -23,6 +23,8 @@ public class RabbitmqAdapter implements QueueAdapter {
         factory.setHost("localhost");
         factory.setPort(5672);
 
+        factory.setRequestedHeartbeat(60);
+
         try {
             conn = factory.newConnection();
             channel = conn.createChannel();
@@ -55,7 +57,14 @@ public class RabbitmqAdapter implements QueueAdapter {
     }
 
     @Override
-    public void consumer() {
+    public void consumer(String queueName) throws EventException  {
+
+        Consumer consumer = new EventExecuter();
+
+        this.receive(
+                queueName,
+                queueName + "_tag",
+                consumer);
 
     }
 
@@ -67,6 +76,7 @@ public class RabbitmqAdapter implements QueueAdapter {
         }
     }
 
+    @Override
     public void close(){
 
         try {

@@ -1,5 +1,6 @@
 package com.gcg.mektup.core.queue.adapter.impl;
 
+import com.gcg.mektup.lang.exception.EventException;
 import com.gcg.mektup.lang.exception.QueueConnectionException;
 import com.gcg.mektup.core.queue.adapter.QueueAdapter;
 
@@ -15,7 +16,7 @@ public class KafkaAdapter implements QueueAdapter {
     }
 
     @Override
-    public void consumer() {
+    public void consumer(String var1) throws EventException {
 
     }
 
