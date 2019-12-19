@@ -1,5 +1,6 @@
 package com.gcg.mektup.core.subscribe.impl;
 
+import com.gcg.mektup.lang.exception.ConfigurationException;
 import com.gcg.mektup.lang.exception.EventException;
 import com.gcg.mektup.core.queue.QueueFactory;
 import com.gcg.mektup.core.queue.adapter.QueueAdapter;
@@ -15,8 +16,8 @@ public class Subscriber {
 
         try {
             queueAdapter = QueueFactory.getQueue();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ConfigurationException e) {
+            throw new EventException("Queue adapter is not valid!", e);
         }
         queueAdapter.connect();
 

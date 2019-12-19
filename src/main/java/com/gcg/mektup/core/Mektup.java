@@ -47,8 +47,6 @@ public class Mektup {
 
             new Scanner().scan(Mektup.scanPackages);
 
-            //TODO : publish subsciber Thread
-            ExecutorService service = Executors.newFixedThreadPool(SubscriberInformation.getInstance().getEventListenerList().size());
             for (int i = 0; i < SubscriberInformation.getInstance().getEventListenerList().size(); i++){
                 MektupLog.info("Registered Subscribing Method! : " + SubscriberInformation.getInstance().getEventListenerList().get(i).getSubscriberMethod());
                 new Subscriber().subscribe(i);

@@ -28,7 +28,7 @@ public class EventPublisher {
 
         MektupLog.info("Id : " + eventId + " event sending queue.");
 
-        queueAdapter.close();
+        //queueAdapter.close();
 
     }
 
