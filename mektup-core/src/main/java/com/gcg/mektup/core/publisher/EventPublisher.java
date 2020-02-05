@@ -2,7 +2,7 @@ package com.gcg.mektup.core.publisher;
 
 import com.gcg.mektup.core.exception.EventIdNotFound;
 import com.gcg.mektup.core.log.MektupLog;
-import com.gcg.mektup.core.event.lang.EventListener;
+import com.gcg.mektup.scanner.lang.EventListener;
 import com.gcg.mektup.core.queue.QueueFactory;
 import com.gcg.mektup.core.scanner.model.SubscriberInformation;
 import com.gcg.mektup.queue.adapter.QueueAdapter;

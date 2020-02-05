@@ -3,7 +3,7 @@ package com.gcg.mektup.core.subscriber.method;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gcg.mektup.core.Mektup;
 import com.gcg.mektup.core.subscriber.Caller;
-import com.gcg.mektup.core.event.lang.EventListener;
+import com.gcg.mektup.scanner.lang.EventListener;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

@@ -1,6 +1,5 @@
-package com.gcg.mektup.core.event.lang;
+package com.gcg.mektup.scanner.lang;
 
-import com.gcg.mektup.core.queue.lang.QueueInformation;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.RequestMethod;
 

@@ -27,6 +27,7 @@
         <module>mektup-service</module>
         <module>mektup-config</module>
         <module>mektup-event</module>
+        <module>mektup-scanner</module>
     </modules>
 
     <dependencyManagement>

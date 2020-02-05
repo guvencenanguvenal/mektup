@@ -10,6 +10,7 @@ import com.gcg.mektup.core.scanner.model.SubscriberInformation;
 import com.gcg.mektup.core.scanner.Scanner;
 import com.gcg.mektup.queue.exception.QueueConfigurationException;
 import com.gcg.mektup.queue.exception.QueueConnectionException;
+import com.gcg.mektup.scanner.exception.ScannerException;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Mektup {
     private static ApplicationContext applicationContext;
     private static List<Future<?>> subscriberThreads = new ArrayList<Future<?>>();
 
-    public  static <T> void  initialize(Class<T> classType, ApplicationContext applicationContext) throws MektupException, QueueConnectionException, QueueConfigurationException {
+    public  static <T> void  initialize(Class<T> classType, ApplicationContext applicationContext) throws MektupException, QueueConnectionException, QueueConfigurationException, ScannerException {
 
         Mektup.mainClass = classType;
 

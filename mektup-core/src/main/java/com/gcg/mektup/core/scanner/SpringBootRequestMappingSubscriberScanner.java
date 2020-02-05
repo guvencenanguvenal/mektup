@@ -3,16 +3,18 @@ package com.gcg.mektup.core.scanner;
 import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.core.annotation.definition.EventRequestMapping;
 import com.gcg.mektup.core.annotation.marker.EventSubscriberService;
-import com.gcg.mektup.core.event.lang.EventListener;
-import com.gcg.mektup.core.exception.ScannerException;
-import com.gcg.mektup.core.queue.lang.QueueInformation;
+import com.gcg.mektup.scanner.adapter.SubscriberScanner;
+import com.gcg.mektup.scanner.lang.EventListener;
+import com.gcg.mektup.scanner.exception.ScannerException;
+import com.gcg.mektup.scanner.lang.QueueInformation;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
- class SubscriberScanner {
+ class SpringBootRequestMappingSubscriberScanner implements SubscriberScanner {
 
     /**
      *
@@ -20,7 +22,7 @@ import java.util.List;
      *
      * @param beanDef
      */
-    protected List<EventListener> scanSubsciber(BeanDefinition beanDef) throws ScannerException{
+    public List<EventListener> scanSubsciber(BeanDefinition beanDef) throws ScannerException{
         try {
 
             List<EventListener> eventListenerList = new ArrayList<>();
@@ -29,10 +31,10 @@ import java.util.List;
 
             for (Method method : cl.getDeclaredMethods()) {
                 if (method.isAnnotationPresent(EventSubscriberService.class)
-                    && method.isAnnotationPresent(EventRequestMapping.class)) {
+                    && method.isAnnotationPresent(RequestMapping.class)) {
 
                     EventSubscriberService eventSubscriberService = method.getAnnotation(EventSubscriberService.class);
-                    EventRequestMapping eventRequestMapping  = method.getAnnotation(EventRequestMapping.class);
+                    RequestMapping eventRequestMapping  = method.getAnnotation(RequestMapping.class);
 
                     EventListener eventListener = new EventListener(
                             eventSubscriberService.eventId(),

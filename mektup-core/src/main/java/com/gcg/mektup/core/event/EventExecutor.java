@@ -3,7 +3,7 @@ package com.gcg.mektup.core.event;
 import com.gcg.mektup.core.scanner.model.SubscriberInformation;
 import com.gcg.mektup.core.subscriber.Caller;
 import com.gcg.mektup.core.subscriber.method.InvokeSubscribe;
-import com.gcg.mektup.core.event.lang.EventListener;
+import com.gcg.mektup.scanner.lang.EventListener;
 
 import java.nio.charset.Charset;
 

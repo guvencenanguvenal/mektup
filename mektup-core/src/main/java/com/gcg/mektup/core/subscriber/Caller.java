@@ -1,6 +1,6 @@
 package com.gcg.mektup.core.subscriber;
 
-import com.gcg.mektup.core.event.lang.EventListener;
+import com.gcg.mektup.scanner.lang.EventListener;
 
 public interface Caller {
 

@@ -1,4 +1,4 @@
-package com.gcg.mektup.core.queue.lang;
+package com.gcg.mektup.scanner.lang;
 
 public class QueueInformation {
 

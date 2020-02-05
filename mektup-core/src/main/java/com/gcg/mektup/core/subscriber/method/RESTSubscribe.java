@@ -1,7 +1,7 @@
 package com.gcg.mektup.core.subscriber.method;
 
 import com.gcg.mektup.core.subscriber.Caller;
-import com.gcg.mektup.core.event.lang.EventListener;
+import com.gcg.mektup.scanner.lang.EventListener;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

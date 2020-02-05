@@ -1,6 +1,6 @@
 package com.gcg.mektup.core.scanner.model;
 
-import com.gcg.mektup.core.event.lang.EventListener;
+import com.gcg.mektup.scanner.lang.EventListener;
 import com.gcg.mektup.core.exception.EventIdNotFound;
 
 import java.util.Collections;

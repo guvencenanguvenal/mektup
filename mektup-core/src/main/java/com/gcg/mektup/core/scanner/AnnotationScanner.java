@@ -1,9 +1,13 @@
 package com.gcg.mektup.core.scanner;
 
 import com.gcg.mektup.core.annotation.marker.EventSubscriber;
+import com.gcg.mektup.core.classloader.SubscriberClassLoader;
+import com.gcg.mektup.core.config.MektupConfiguration;
+import com.gcg.mektup.core.exception.ConfigurationException;
 import com.gcg.mektup.core.log.MektupLog;
-import com.gcg.mektup.core.event.lang.EventListener;
-import com.gcg.mektup.core.exception.ScannerException;
+import com.gcg.mektup.scanner.adapter.SubscriberScanner;
+import com.gcg.mektup.scanner.lang.EventListener;
+import com.gcg.mektup.scanner.exception.ScannerException;
 import com.gcg.mektup.core.scanner.model.SubscriberInformation;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
@@ -25,7 +29,7 @@ import java.util.List;
      *
      * @param scanPackages
      */
-    protected void scan(String[] scanPackages) throws ScannerException {
+    protected void scan(String[] scanPackages) throws ScannerException, ConfigurationException {
 
         List<EventListener> eventListenerList = new ArrayList<>();
 
@@ -33,7 +37,7 @@ import java.util.List;
             ClassPathScanningCandidateComponentProvider provider = createAnnotationScanner();
             MektupLog.info("Scanning package : " + scanPackage);
             for (BeanDefinition beanDef : provider.findCandidateComponents(scanPackage)) {
-                eventListenerList.addAll(new SubscriberScanner().scanSubsciber(beanDef));
+                eventListenerList.addAll(SubscriberClassLoader.loadClass().scanSubsciber(beanDef));
             }
         }
 

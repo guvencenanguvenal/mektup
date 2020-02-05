@@ -25,6 +25,8 @@ public class MektupConfiguration implements Configuration {
     private boolean eventsInfoService = true; //Have default value
     private int servicePort = 8888; //Have default value
 
+    private String listenerScanner = "com.gcg.mektup.core.scanner.MektupRequestMappingSubscriberScanner"; //Have default value
+
     public boolean isDependencyService() {
         return dependencyService;
     }
@@ -37,6 +39,14 @@ public class MektupConfiguration implements Configuration {
         return servicePort;
     }
 
+    public String getListenerScanner() {
+        return listenerScanner;
+    }
+
+    public void setListenerScanner(String listenerScanner) {
+        this.listenerScanner = listenerScanner;
+    }
+
     @Override
     public void initialize() throws ConfigurationException {
         try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.MEKTUP_PROPERTIES_FILE_NAME)) {
@@ -47,6 +57,8 @@ public class MektupConfiguration implements Configuration {
             dependencyService = Boolean.valueOf(prop.getProperty(ConfigConstants.DEPENDENCY_SERVICE));
             eventsInfoService = Boolean.valueOf(prop.getProperty(ConfigConstants.EVENTS_INFO_SERVICE));
             servicePort = Integer.valueOf(prop.getProperty(ConfigConstants.MEKTUP_SERVICE_PORT));
+
+            listenerScanner = prop.getProperty(ConfigConstants.LISTENER_SCANNER_CLASS);
 
         } catch (IOException ex) {
             MektupLog.severe("Mektup property is not found!");
