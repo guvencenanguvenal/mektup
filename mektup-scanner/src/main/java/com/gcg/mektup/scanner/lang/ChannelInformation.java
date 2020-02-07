@@ -1,12 +1,12 @@
 package com.gcg.mektup.scanner.lang;
 
-public class QueueInformation {
+public class ChannelInformation {
 
     //Queue Informations
     private String exchangeName;
     private String queueName;
 
-    public QueueInformation(String exchangeName, String queueName){
+    public ChannelInformation(String exchangeName, String queueName){
         this.exchangeName = exchangeName;
         this.queueName = queueName;
     }

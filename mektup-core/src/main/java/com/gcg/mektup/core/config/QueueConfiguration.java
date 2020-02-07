@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class QueueConfiguration implements Configuration {
+public class QueueConfiguration implements Configuration, ConfigConstants {
 
     private static final QueueConfiguration INSTANCE = new QueueConfiguration();
 
@@ -27,12 +27,12 @@ public class QueueConfiguration implements Configuration {
 
     @Override
     public void initialize() throws ConfigurationException {
-        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.MEKTUP_PROPERTIES_FILE_NAME)) {
+        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(MEKTUP_PROPERTIES_FILE_NAME)) {
 
             Properties prop = new Properties();
             prop.load(input);
 
-            queueAdapter = prop.getProperty(ConfigConstants.QUEUE_ADAPTER);
+            queueAdapter = prop.getProperty(QUEUE_ADAPTER);
 
         } catch (IOException ex) {
             MektupLog.severe("Mektup log property is not found!");

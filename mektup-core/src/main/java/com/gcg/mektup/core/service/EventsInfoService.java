@@ -1,6 +1,6 @@
 package com.gcg.mektup.core.service;
 
-import com.gcg.mektup.core.scanner.model.SubscriberInformation;
+import com.gcg.mektup.core.subscriber.lang.Subscribers;
 
 public class EventsInfoService {
 
@@ -12,21 +12,21 @@ public class EventsInfoService {
 
         response.append("{ \"Event Info\" : [");
 
-        for (int i = 0; i < SubscriberInformation.getInstance().getEventListenerList().size(); i++){
+        for (int i = 0; i < Subscribers.getInstance().getEventListenerList().size(); i++){
             response.append("{");
-            response.append("\"Id\":" + SubscriberInformation.getInstance().getEventListenerList().get(i).getEventId() + ",");
-            response.append("\"RequestMethod\":" + "\"" + SubscriberInformation.getInstance().getEventListenerList().get(i).getRequestMethod().toString() + "\"" + ",");
-            response.append("\"SubscriberMethod\":" + "\"" + SubscriberInformation.getInstance().getEventListenerList().get(i).getSubscriberMethod().toString() + "\"" + ",");
+            response.append("\"Id\":" + Subscribers.getInstance().getEventListenerList().get(i).getEventId() + ",");
+            response.append("\"RequestMethod\":" + "\"" + Subscribers.getInstance().getEventListenerList().get(i).getRequestInformation().getRequestMethod() + "\"" + ",");
+            response.append("\"SubscriberMethod\":" + "\"" + Subscribers.getInstance().getEventListenerList().get(i).getServiceInformation().getSubscriberMethod().toString() + "\"" + ",");
             response.append("\"QueueInformation\":" + "\""
-                    + SubscriberInformation.getInstance().getEventListenerList().get(i).getQueueInformation().getQueueName() + "-"
-                    + SubscriberInformation.getInstance().getEventListenerList().get(i).getQueueInformation().getExchangeName()
+                    + Subscribers.getInstance().getEventListenerList().get(i).getChannelInformation().getQueueName() + "-"
+                    + Subscribers.getInstance().getEventListenerList().get(i).getChannelInformation().getExchangeName()
                     + "\"" + ",");
-            response.append("\"Path\":" + "\"" + SubscriberInformation.getInstance().getEventListenerList().get(i).getPath() + "\"" + ",");
-            response.append("\"HttpMethod\":" + "\"" + SubscriberInformation.getInstance().getEventListenerList().get(i).getHttpMethod().toString() + "\"" + ",");
-            response.append("\"SubscriberClass\":" + "\"" + SubscriberInformation.getInstance().getEventListenerList().get(i).getSubscriberClass().toString() + "\"");
+            response.append("\"Path\":" + "\"" + Subscribers.getInstance().getEventListenerList().get(i).getRequestInformation().getPath() + "\"" + ",");
+            response.append("\"HttpMethod\":" + "\"" + Subscribers.getInstance().getEventListenerList().get(i).getRequestInformation().getHttpMethod() + "\"" + ",");
+            response.append("\"SubscriberClass\":" + "\"" + Subscribers.getInstance().getEventListenerList().get(i).getServiceInformation().getSubscriberClass().toString() + "\"");
             response.append("}");
 
-            if (i < SubscriberInformation.getInstance().getEventListenerList().size() - 1){
+            if (i < Subscribers.getInstance().getEventListenerList().size() - 1){
                 response.append(",");
             }
         }

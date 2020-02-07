@@ -6,6 +6,8 @@ import com.gcg.mektup.queue.adapter.QueueAdapter;
 
 public class QueueFactory {
 
+    private QueueFactory(){}
+
     private static QueueAdapter QUEUE_INSTANCE = null;
 
     public static QueueAdapter getQueue() throws ConfigurationException {

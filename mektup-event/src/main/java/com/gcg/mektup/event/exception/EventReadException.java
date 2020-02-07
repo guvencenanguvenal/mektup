@@ -1,4 +1,6 @@
-package com.gcg.mektup.core.exception;
+package com.gcg.mektup.event.exception;
+
+import com.gcg.mektup.event.exception.EventException;
 
 public class EventReadException extends EventException {
     public EventReadException(String errorMessage) {

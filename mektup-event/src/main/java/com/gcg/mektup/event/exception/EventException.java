@@ -1,6 +1,6 @@
-package com.gcg.mektup.core.exception;
+package com.gcg.mektup.event.exception;
 
-public class EventException extends MektupException {
+public class EventException extends Exception {
 
     public EventException(String errorMessage){
         super(errorMessage);

@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 
-public class LogConfiguration implements Configuration {
+public class LogConfiguration implements Configuration, ConfigConstants {
 
     private static final LogConfiguration INSTANCE = new LogConfiguration();
 
@@ -19,8 +19,6 @@ public class LogConfiguration implements Configuration {
     }
 
     private LogConfiguration(){
-
-
 
     }
 
@@ -45,13 +43,13 @@ public class LogConfiguration implements Configuration {
 
     @Override
     public void initialize() throws ConfigurationException {
-        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(ConfigConstants.LOG_PROPERTIES_FILE_NAME)) {
+        try (InputStream input = Mektup.class.getClassLoader().getResourceAsStream(LOG_PROPERTIES_FILE_NAME)) {
 
             Properties prop = new Properties();
             prop.load(input);
 
-            logLevel = Level.parse(prop.getProperty(ConfigConstants.LOG_LEVEL));
-            formatter = prop.getProperty(ConfigConstants.LOG_FORMATTER);
+            logLevel = Level.parse(prop.getProperty(LOG_LEVEL));
+            formatter = prop.getProperty(LOG_FORMATTER);
 
         } catch (IOException ex) {
             MektupLog.severe("Mektup log property is not found!");

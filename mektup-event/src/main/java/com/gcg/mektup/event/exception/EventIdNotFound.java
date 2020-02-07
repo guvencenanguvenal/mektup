@@ -1,4 +1,6 @@
-package com.gcg.mektup.core.exception;
+package com.gcg.mektup.event.exception;
+
+import com.gcg.mektup.event.exception.EventCreateException;
 
 public class EventIdNotFound extends EventCreateException {
     public EventIdNotFound(String errorMessage) {

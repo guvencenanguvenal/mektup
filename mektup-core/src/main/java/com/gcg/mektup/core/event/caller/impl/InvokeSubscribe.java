@@ -1,9 +1,9 @@
-package com.gcg.mektup.core.subscriber.method;
+package com.gcg.mektup.core.event.caller.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gcg.mektup.core.Mektup;
-import com.gcg.mektup.core.subscriber.Caller;
-import com.gcg.mektup.scanner.lang.EventListener;
+import com.gcg.mektup.event.caller.Caller;
+import com.gcg.mektup.scanner.lang.SubscriberInformation;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -11,13 +11,13 @@ import java.lang.reflect.InvocationTargetException;
 public class InvokeSubscribe implements Caller {
 
     @Override
-    public void call(EventListener eventListener, byte[] bytes) {
+    public void call(SubscriberInformation subscriberInformation, byte[] bytes) {
 
-        Object obj = Mektup.getApplicationContext().getBean(eventListener.getSubscriberClass());
+        Object obj = Mektup.getApplicationContext().getBean(subscriberInformation.getServiceInformation().getSubscriberClass());
 
-        if (eventListener.getSubscriberMethodInputs().length == 0){
+        if (subscriberInformation.getServiceInformation().getSubscriberMethodInputs().length == 0){
             try {
-                eventListener.getSubscriberMethod().invoke(obj);
+                subscriberInformation.getServiceInformation().getSubscriberMethod().invoke(obj);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
@@ -30,13 +30,13 @@ public class InvokeSubscribe implements Caller {
             ObjectMapper objectMapper = new ObjectMapper();
             Object requestObj = null;
             try {
-                requestObj = objectMapper.readValue(bytes, eventListener.getSubscriberMethodInputs()[0]);
+                requestObj = objectMapper.readValue(bytes, subscriberInformation.getServiceInformation().getSubscriberMethodInputs()[0]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             try {
-                eventListener.getSubscriberMethod().invoke(obj, eventListener.getSubscriberMethodInputs()[0].cast(requestObj));
+                subscriberInformation.getServiceInformation().getSubscriberMethod().invoke(obj, subscriberInformation.getServiceInformation().getSubscriberMethodInputs()[0].cast(requestObj));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {

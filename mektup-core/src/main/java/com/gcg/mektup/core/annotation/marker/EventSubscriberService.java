@@ -11,6 +11,8 @@ public @interface EventSubscriberService {
 
     long eventId() default -1L;
 
+    String exchange();
+
     String queue();
 
     boolean idempotency() default false;

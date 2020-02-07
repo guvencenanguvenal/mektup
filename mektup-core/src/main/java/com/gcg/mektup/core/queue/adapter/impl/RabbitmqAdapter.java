@@ -1,8 +1,10 @@
 package com.gcg.mektup.core.queue.adapter.impl;
 
+import com.gcg.mektup.event.lang.EventInformation;
 import com.gcg.mektup.queue.adapter.QueueAdapter;
 import com.gcg.mektup.queue.exception.QueueConfigurationException;
 import com.gcg.mektup.queue.exception.QueueConnectionException;
+import com.gcg.mektup.scanner.lang.SubscriberInformation;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -36,14 +38,14 @@ public class RabbitmqAdapter implements QueueAdapter {
 
     }
 
-    public void send(String exchangeName, String queueName, byte[] var) throws QueueConnectionException {
+    public void send(EventInformation eventInformation, byte[] var) throws QueueConnectionException {
         try {
 
             if (null == conn){
                 throw new QueueConnectionException("Queue is not Connect");
             }
 
-            channel.basicPublish(exchangeName, queueName, null, var);
+            channel.basicPublish(eventInformation.getExchangeName(), eventInformation.getQueueName(), null, var);
 
             channel.close();
 
@@ -56,19 +58,20 @@ public class RabbitmqAdapter implements QueueAdapter {
     }
 
     @Override
-    public void consumer(String queueName) throws QueueConfigurationException {
+    public void consumer(SubscriberInformation subscriberInformation) throws QueueConfigurationException {
 
         Consumer consumer = new EventExecuter();
 
         this.receive(
-                queueName,
-                queueName + "_tag",
+                subscriberInformation.getChannelInformation().getQueueName(),
+                subscriberInformation.getChannelInformation().getQueueName() + "_tag",
                 consumer);
 
     }
 
     public void receive(String queueName, String tag, Consumer consumer) throws QueueConfigurationException {
         try {
+
             channel.basicConsume(queueName, true, tag, consumer);
         } catch (IOException e) {
         throw  new QueueConfigurationException(e.getMessage(), e);

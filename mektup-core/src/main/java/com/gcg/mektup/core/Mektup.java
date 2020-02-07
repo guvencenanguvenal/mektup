@@ -1,13 +1,14 @@
 package com.gcg.mektup.core;
 
 import com.gcg.mektup.core.config.builder.ConfigurationBuilder;
+import com.gcg.mektup.core.constant.MektupConstants;
 import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.core.service.server.MektupHttpServer;
 import com.gcg.mektup.core.subscriber.Subscriber;
 import com.gcg.mektup.core.annotation.scanner.MektupScan;
 import com.gcg.mektup.core.exception.MektupException;
-import com.gcg.mektup.core.scanner.model.SubscriberInformation;
-import com.gcg.mektup.core.scanner.Scanner;
+import com.gcg.mektup.core.subscriber.lang.Subscribers;
+import com.gcg.mektup.core.scanner.PackageScanner;
 import com.gcg.mektup.queue.exception.QueueConfigurationException;
 import com.gcg.mektup.queue.exception.QueueConnectionException;
 import com.gcg.mektup.scanner.exception.ScannerException;
@@ -39,7 +40,7 @@ public class Mektup {
                     "\\_|  |_/\\___|_|\\_\\\\__|\\__,_| .__/ \n" +
                     "                           | |    \n" +
                     "                           |_|    \n");
-            System.out.println(":: Mektup ::            (v0.0.1)");
+            System.out.println(":: Mektup ::             " + MektupConstants.MEKTUP_VERSION);
 
             MektupScan scanAnnotation = Mektup.mainClass.getAnnotation(MektupScan.class);
             //TODO : Assert null
@@ -48,10 +49,10 @@ public class Mektup {
 
             ConfigurationBuilder.configInitializer();
 
-            new Scanner().scan(Mektup.scanPackages);
+            new PackageScanner().scan(Mektup.scanPackages);
 
-            for (int i = 0; i < SubscriberInformation.getInstance().getEventListenerList().size(); i++){
-                MektupLog.info("Registered Subscribing Method! : " + SubscriberInformation.getInstance().getEventListenerList().get(i).getSubscriberMethod());
+            for (int i = 0; i < Subscribers.getInstance().getEventListenerList().size(); i++){
+                MektupLog.info("Registered Subscribing Method! : " + Subscribers.getInstance().getEventListenerList().get(i).getServiceInformation().getSubscriberMethod());
                 new Subscriber().subscribe(i);
             }
 

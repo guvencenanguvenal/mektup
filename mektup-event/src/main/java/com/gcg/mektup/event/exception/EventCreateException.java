@@ -1,4 +1,4 @@
-package com.gcg.mektup.core.exception;
+package com.gcg.mektup.event.exception;
 
 public class EventCreateException extends EventException {
 

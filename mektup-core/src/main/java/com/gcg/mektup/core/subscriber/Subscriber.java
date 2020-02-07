@@ -1,9 +1,8 @@
 package com.gcg.mektup.core.subscriber;
 
 import com.gcg.mektup.core.exception.ConfigurationException;
-import com.gcg.mektup.core.exception.EventException;
 import com.gcg.mektup.core.queue.QueueFactory;
-import com.gcg.mektup.core.scanner.model.SubscriberInformation;
+import com.gcg.mektup.core.subscriber.lang.Subscribers;
 import com.gcg.mektup.queue.adapter.QueueAdapter;
 import com.gcg.mektup.queue.exception.QueueConfigurationException;
 import com.gcg.mektup.queue.exception.QueueConnectionException;
@@ -21,9 +20,7 @@ public class Subscriber {
         }
         queueAdapter.connect();
 
-        queueAdapter.consumer(
-                SubscriberInformation.getInstance().getEventListenerList().get(subscriberId).getQueueInformation().getQueueName()
-        );
+        queueAdapter.consumer(Subscribers.getInstance().getEventListenerList().get(subscriberId));
 
     }
 

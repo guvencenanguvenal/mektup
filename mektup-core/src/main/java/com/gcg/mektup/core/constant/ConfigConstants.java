@@ -1,23 +1,25 @@
 package com.gcg.mektup.core.constant;
 
-public class ConfigConstants {
+public interface ConfigConstants {
 
-    private ConfigConstants(){} //Dont instance
+    String LOG_PROPERTIES_FILE_NAME = "mektup-log.properties";
 
+    String MEKTUP_PROPERTIES_FILE_NAME = "mektup.properties";
 
-    public static final String LOG_PROPERTIES_FILE_NAME = "mektup-log.properties";
+    String MEKTUP_SERVICE_PORT = "mektup.service.port";
+    String DEPENDENCY_SERVICE = "mektup.service.dependencyService";
+    String EVENTS_INFO_SERVICE = "mektup.service.eventsInfoService";
 
-    public static final String MEKTUP_PROPERTIES_FILE_NAME = "mektup.properties";
+    String SUBSCRIBER_SERVICE_INFORMATION_SCANNER_CLASS = "mektup.subscriber.service.information.scanner";
+    String SUBSCRIBER_REQUEST_INFORMATION_SCANNER_CLASS = "mektup.subscriber.request.information.scanner";
+    String SUBSCRIBER_SCANNER_CLASS = "mektup.subscriber.scanner";
+    String EVENT_CREATOR_CLASS = "mektup.event.creator";
 
-    public static final String MEKTUP_SERVICE_PORT = "mektup.service.port";
-    public static final String DEPENDENCY_SERVICE = "mektup.service.dependencyService";
-    public static final String EVENTS_INFO_SERVICE = "mektup.service.eventsInfoService";
+    String CALLER_CLASS = "mektup.event.caller";
 
-    public static final String LISTENER_SCANNER_CLASS = "mektup.listener.scanner";
+    String LOG_LEVEL = "mektup.log.level";
+    String LOG_FORMATTER = "mektup.log.formatter";
 
-    public static final String LOG_LEVEL = "mektup.log.level";
-    public static final String LOG_FORMATTER = "mektup.log.formatter";
-
-    public static final String QUEUE_ADAPTER = "mektup.queue.adapter";
+    String QUEUE_ADAPTER = "mektup.queue.adapter";
 
 }

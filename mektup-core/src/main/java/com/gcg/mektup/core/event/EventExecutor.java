@@ -1,9 +1,10 @@
 package com.gcg.mektup.core.event;
 
-import com.gcg.mektup.core.scanner.model.SubscriberInformation;
-import com.gcg.mektup.core.subscriber.Caller;
-import com.gcg.mektup.core.subscriber.method.InvokeSubscribe;
-import com.gcg.mektup.scanner.lang.EventListener;
+import com.gcg.mektup.core.classloader.EventServiceCallerClassLoader;
+import com.gcg.mektup.core.exception.ConfigurationException;
+import com.gcg.mektup.core.subscriber.lang.Subscribers;
+import com.gcg.mektup.event.caller.Caller;
+import com.gcg.mektup.scanner.lang.SubscriberInformation;
 
 import java.nio.charset.Charset;
 
@@ -16,12 +17,19 @@ public class EventExecutor {
         System.out.println(routingKey);
         System.out.println(new String(output, Charset.forName("UTF-8")));
 
-        EventListener eventListener = SubscriberInformation
+        SubscriberInformation subscriberInformation = Subscribers
                 .getInstance()
                 .getEventListenerFromQueueName(routingKey);
 
-        Caller caller = new InvokeSubscribe();
-        caller.call(eventListener, output);
+        Caller caller = null;
+
+        try {
+            caller = EventServiceCallerClassLoader.loadClass();
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        caller.call(subscriberInformation, output);
 
         //restTemplate.put(url, entity);
 

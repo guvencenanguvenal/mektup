@@ -1,9 +1,10 @@
-package com.gcg.mektup.core.subscriber.method;
+package com.gcg.mektup.core.event.caller.impl;
 
-import com.gcg.mektup.core.subscriber.Caller;
-import com.gcg.mektup.scanner.lang.EventListener;
+import com.gcg.mektup.event.caller.Caller;
+import com.gcg.mektup.scanner.lang.SubscriberInformation;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,7 +15,7 @@ public class RESTSubscribe implements Caller {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
-    public void call(EventListener eventListener, byte[] bytes) {
+    public void call(SubscriberInformation subscriberInformation, byte[] bytes) {
 
         String url = "http://localhost:8080";
 
@@ -23,8 +24,8 @@ public class RESTSubscribe implements Caller {
 
         HttpEntity<String> entity = new HttpEntity<>(new String(bytes, Charset.forName("UTF-8")), headers);
 
-        restTemplate.exchange(url + eventListener.getPath(),
-                eventListener.getHttpMethod(),
+        restTemplate.exchange(url + subscriberInformation.getRequestInformation().getPath(),
+                HttpMethod.valueOf(subscriberInformation.getRequestInformation().getHttpMethod()),
                 entity,
                 String.class);
 

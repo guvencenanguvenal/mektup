@@ -7,16 +7,16 @@ import com.gcg.mektup.queue.adapter.QueueAdapter;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class QueueClassLoader  {
+public interface QueueClassLoader  {
 
-    public static QueueAdapter loadClass() throws ConfigurationException {
+     static QueueAdapter loadClass() throws ConfigurationException {
 
-        Class exampleClass = null;
-        Object ob = null;
+        Class queueClass = null;
+        Object queueObject = null;
 
         try {
-            exampleClass = Class.forName(QueueConfiguration.getInstance().getQueueAdapter());
-            ob = exampleClass.getDeclaredConstructor().newInstance();
+            queueClass = Class.forName(QueueConfiguration.getInstance().getQueueAdapter());
+            queueObject = queueClass.getDeclaredConstructor().newInstance();
 
             MektupLog.info("QueueAdapter created!");
 
@@ -37,8 +37,8 @@ public class QueueClassLoader  {
             throw new ConfigurationException("QueueAdapter is not valid!", e);
         }
 
-        if (ob instanceof QueueAdapter)
-            return (QueueAdapter) ob;
+        if (queueObject instanceof QueueAdapter)
+            return (QueueAdapter) queueObject;
         else {
             MektupLog.severe("Queue implementation does not implement QueueAdapter!");
             throw new ConfigurationException("Queue implementation does not implement QueueAdapter!", new ClassCastException());

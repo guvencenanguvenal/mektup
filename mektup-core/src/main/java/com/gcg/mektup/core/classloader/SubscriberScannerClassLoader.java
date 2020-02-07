@@ -3,22 +3,22 @@ package com.gcg.mektup.core.classloader;
 import com.gcg.mektup.core.config.MektupConfiguration;
 import com.gcg.mektup.core.exception.ConfigurationException;
 import com.gcg.mektup.core.log.MektupLog;
-import com.gcg.mektup.scanner.adapter.SubscriberScanner;
+import com.gcg.mektup.scanner.SubscriberScanner;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class SubscriberClassLoader {
+public interface SubscriberScannerClassLoader {
 
-    public static SubscriberScanner loadClass() throws ConfigurationException {
+     static SubscriberScanner loadClass() throws ConfigurationException {
 
         Class subscriberClass = null;
         Object subscriber = null;
 
         try {
-            subscriberClass = Class.forName(MektupConfiguration.getInstance().getListenerScanner());
+            subscriberClass = Class.forName(MektupConfiguration.getInstance().getSubscriberScannerClass());
             subscriber = subscriberClass.getDeclaredConstructor().newInstance();
 
-            MektupLog.info("QueueAdapter created!");
+            MektupLog.info("SubscriberScanner created!");
 
         } catch (ClassNotFoundException e) {
             MektupLog.severe("SubscriberScanner is not valid!");
