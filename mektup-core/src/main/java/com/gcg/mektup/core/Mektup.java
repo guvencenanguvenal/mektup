@@ -9,8 +9,8 @@ import com.gcg.mektup.core.annotation.scanner.MektupScan;
 import com.gcg.mektup.core.exception.MektupException;
 import com.gcg.mektup.core.subscriber.lang.Subscribers;
 import com.gcg.mektup.core.scanner.PackageScanner;
-import com.gcg.mektup.queue.exception.QueueConfigurationException;
-import com.gcg.mektup.queue.exception.QueueConnectionException;
+import com.gcg.mektup.channel.exception.ChannelConfigurationException;
+import com.gcg.mektup.channel.exception.ChannelConnectionException;
 import com.gcg.mektup.scanner.exception.ScannerException;
 import org.springframework.context.ApplicationContext;
 
@@ -26,7 +26,7 @@ public class Mektup {
     private static ApplicationContext applicationContext;
     private static List<Future<?>> subscriberThreads = new ArrayList<Future<?>>();
 
-    public  static <T> void  initialize(Class<T> classType, ApplicationContext applicationContext) throws MektupException, QueueConnectionException, QueueConfigurationException, ScannerException {
+    public  static <T> void  initialize(Class<T> classType, ApplicationContext applicationContext) throws MektupException, ChannelConnectionException, ChannelConfigurationException, ScannerException {
 
         Mektup.mainClass = classType;
 
@@ -44,6 +44,9 @@ public class Mektup {
 
             MektupScan scanAnnotation = Mektup.mainClass.getAnnotation(MektupScan.class);
             //TODO : Assert null
+            if (null == scanAnnotation)
+                throw new MektupException("MektupScan annotation is not found!");
+
             Mektup.scanPackages = scanAnnotation.value();
             Mektup.applicationContext = applicationContext;
 

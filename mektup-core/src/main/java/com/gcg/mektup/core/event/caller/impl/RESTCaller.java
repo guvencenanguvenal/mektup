@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 
-public class RESTSubscribe implements Caller {
+public class RESTCaller implements Caller {
 
     private final RestTemplate restTemplate = new RestTemplate();
 

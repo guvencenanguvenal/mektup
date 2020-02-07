@@ -1,22 +1,22 @@
-package com.gcg.mektup.core.queue.adapter.impl;
+package com.gcg.mektup.core.channel.adapter.impl;
 
 import com.gcg.mektup.event.lang.EventInformation;
-import com.gcg.mektup.queue.adapter.QueueAdapter;
-import com.gcg.mektup.queue.exception.QueueConfigurationException;
-import com.gcg.mektup.queue.exception.QueueConnectionException;
+import com.gcg.mektup.channel.ChannelAdapter;
+import com.gcg.mektup.channel.exception.ChannelConfigurationException;
+import com.gcg.mektup.channel.exception.ChannelConnectionException;
 import com.gcg.mektup.scanner.lang.SubscriberInformation;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class RabbitmqAdapter implements QueueAdapter {
+public class RabbitmqAdapter implements ChannelAdapter {
 
     private ConnectionFactory factory = new ConnectionFactory();
     private Connection conn;
     private Channel channel;
 
-    public void connect() throws QueueConnectionException {
+    public void connect() throws ChannelConnectionException {
 
         factory.setUsername("guest");
         factory.setPassword("guest");
@@ -30,19 +30,19 @@ public class RabbitmqAdapter implements QueueAdapter {
             conn = factory.newConnection();
             channel = conn.createChannel();
         } catch (IOException e) {
-            throw new QueueConnectionException(e.getMessage(), e);
+            throw new ChannelConnectionException(e.getMessage(), e);
         } catch (TimeoutException e) {
-            throw new QueueConnectionException(e.getMessage(), e);
+            throw new ChannelConnectionException(e.getMessage(), e);
         }
 
 
     }
 
-    public void send(EventInformation eventInformation, byte[] var) throws QueueConnectionException {
+    public void send(EventInformation eventInformation, byte[] var) throws ChannelConnectionException {
         try {
 
             if (null == conn){
-                throw new QueueConnectionException("Queue is not Connect");
+                throw new ChannelConnectionException("Queue is not Connect");
             }
 
             channel.basicPublish(eventInformation.getExchangeName(), eventInformation.getQueueName(), null, var);
@@ -50,17 +50,17 @@ public class RabbitmqAdapter implements QueueAdapter {
             channel.close();
 
         } catch (IOException e) {
-            throw new QueueConnectionException(e.getMessage(), e);
+            throw new ChannelConnectionException(e.getMessage(), e);
         } catch (TimeoutException e) {
-            throw new QueueConnectionException(e.getMessage(), e);
+            throw new ChannelConnectionException(e.getMessage(), e);
         }
 
     }
 
     @Override
-    public void consumer(SubscriberInformation subscriberInformation) throws QueueConfigurationException {
+    public void consumer(SubscriberInformation subscriberInformation) throws ChannelConfigurationException {
 
-        Consumer consumer = new EventExecuter();
+        Consumer consumer = new RabbitmqEventConsumer();
 
         this.receive(
                 subscriberInformation.getChannelInformation().getQueueName(),
@@ -69,12 +69,12 @@ public class RabbitmqAdapter implements QueueAdapter {
 
     }
 
-    public void receive(String queueName, String tag, Consumer consumer) throws QueueConfigurationException {
+    public void receive(String queueName, String tag, Consumer consumer) throws ChannelConfigurationException {
         try {
 
             channel.basicConsume(queueName, true, tag, consumer);
         } catch (IOException e) {
-        throw  new QueueConfigurationException(e.getMessage(), e);
+        throw  new ChannelConfigurationException(e.getMessage(), e);
         }
     }
 

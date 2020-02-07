@@ -1,26 +1,26 @@
 package com.gcg.mektup.core.subscriber;
 
 import com.gcg.mektup.core.exception.ConfigurationException;
-import com.gcg.mektup.core.queue.QueueFactory;
+import com.gcg.mektup.core.channel.ChannelFactory;
 import com.gcg.mektup.core.subscriber.lang.Subscribers;
-import com.gcg.mektup.queue.adapter.QueueAdapter;
-import com.gcg.mektup.queue.exception.QueueConfigurationException;
-import com.gcg.mektup.queue.exception.QueueConnectionException;
+import com.gcg.mektup.channel.ChannelAdapter;
+import com.gcg.mektup.channel.exception.ChannelConfigurationException;
+import com.gcg.mektup.channel.exception.ChannelConnectionException;
 
 public class Subscriber {
 
-    public void subscribe(int subscriberId) throws QueueConnectionException, QueueConfigurationException {
+    public void subscribe(int subscriberId) throws ChannelConnectionException, ChannelConfigurationException {
 
-        QueueAdapter queueAdapter = null;
+        ChannelAdapter channelAdapter = null;
 
         try {
-            queueAdapter = QueueFactory.getQueue();
+            channelAdapter = ChannelFactory.getChannel();
         } catch (ConfigurationException e) {
-            throw new QueueConfigurationException("Queue adapter is not valid!", e);
+            throw new ChannelConfigurationException("Channel adapter is not valid!", e);
         }
-        queueAdapter.connect();
+        channelAdapter.connect();
 
-        queueAdapter.consumer(Subscribers.getInstance().getEventListenerList().get(subscriberId));
+        channelAdapter.consumer(Subscribers.getInstance().getEventListenerList().get(subscriberId));
 
     }
 

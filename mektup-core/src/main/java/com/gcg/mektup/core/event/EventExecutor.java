@@ -8,18 +8,16 @@ import com.gcg.mektup.scanner.lang.SubscriberInformation;
 
 import java.nio.charset.Charset;
 
-public class EventExecutor {
+public class EventExecutor implements com.gcg.mektup.event.EventExecutor {
 
     public EventExecutor(){}
 
-    public void execute(String routingKey, byte[] output) {
-        System.out.println("I am call");
-        System.out.println(routingKey);
-        System.out.println(new String(output, Charset.forName("UTF-8")));
+    @Override
+    public void execute(SubscriberInformation subscriberInformation, byte[] output) {
 
-        SubscriberInformation subscriberInformation = Subscribers
-                .getInstance()
-                .getEventListenerFromQueueName(routingKey);
+        System.out.println("I am call");
+        System.out.println(subscriberInformation.getChannelInformation().getQueueName());
+        System.out.println(new String(output, Charset.forName("UTF-8")));
 
         Caller caller = null;
 
@@ -31,13 +29,5 @@ public class EventExecutor {
 
         caller.call(subscriberInformation, output);
 
-        //restTemplate.put(url, entity);
-
-        //TODO
-        /*RequestMapping requestMapping = eventListener.getSubscriberMethod().getDeclaredAnnotation(RequestMapping.class);
-        url += requestMapping.value()[0];*/
-
-
     }
-
 }

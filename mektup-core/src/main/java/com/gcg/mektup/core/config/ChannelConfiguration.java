@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class QueueConfiguration implements Configuration, ConfigConstants {
+public class ChannelConfiguration implements Configuration, ConfigConstants {
 
-    private static final QueueConfiguration INSTANCE = new QueueConfiguration();
+    private static final ChannelConfiguration INSTANCE = new ChannelConfiguration();
 
-    public static QueueConfiguration getInstance(){ return INSTANCE; }
+    public static ChannelConfiguration getInstance(){ return INSTANCE; }
 
-    private QueueConfiguration(){
+    private ChannelConfiguration(){
 
     }
 

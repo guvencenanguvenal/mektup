@@ -1,21 +1,21 @@
 package com.gcg.mektup.core.classloader;
 
-import com.gcg.mektup.core.config.QueueConfiguration;
+import com.gcg.mektup.core.config.ChannelConfiguration;
 import com.gcg.mektup.core.log.MektupLog;
 import com.gcg.mektup.core.exception.ConfigurationException;
-import com.gcg.mektup.queue.adapter.QueueAdapter;
+import com.gcg.mektup.channel.ChannelAdapter;
 
 import java.lang.reflect.InvocationTargetException;
 
-public interface QueueClassLoader  {
+public interface ChannelClassLoader {
 
-     static QueueAdapter loadClass() throws ConfigurationException {
+     static ChannelAdapter loadClass() throws ConfigurationException {
 
         Class queueClass = null;
         Object queueObject = null;
 
         try {
-            queueClass = Class.forName(QueueConfiguration.getInstance().getQueueAdapter());
+            queueClass = Class.forName(ChannelConfiguration.getInstance().getQueueAdapter());
             queueObject = queueClass.getDeclaredConstructor().newInstance();
 
             MektupLog.info("QueueAdapter created!");
@@ -37,8 +37,8 @@ public interface QueueClassLoader  {
             throw new ConfigurationException("QueueAdapter is not valid!", e);
         }
 
-        if (queueObject instanceof QueueAdapter)
-            return (QueueAdapter) queueObject;
+        if (queueObject instanceof ChannelAdapter)
+            return (ChannelAdapter) queueObject;
         else {
             MektupLog.severe("Queue implementation does not implement QueueAdapter!");
             throw new ConfigurationException("Queue implementation does not implement QueueAdapter!", new ClassCastException());
